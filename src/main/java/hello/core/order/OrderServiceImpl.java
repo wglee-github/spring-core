@@ -14,9 +14,30 @@ public class OrderServiceImpl implements OrderService{
 	 *  하지만 memberRepository 조회의 역할만 하기때문에 회원 도메인 입장에서도 변경될 이슈가 적다. 
 	 *  따라서 지금과 같이 단순히 조회만 하는 경우 service를 거치지 말고 repository에 바로 접근하는것이 유리할 수 있다. 
 	 */
-	private final MemberRepository memberRepository = new MemoryMemberRepository();
-	private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+//	private final MemberRepository memberRepository = new MemoryMemberRepository();
+//	private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+//	private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 	
+	/**
+	 * DIP 를 지키자.
+	 */
+	private final DiscountPolicy discountPolicy;
+	private final MemberRepository memberRepository;
+	
+	
+	public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+		this.memberRepository = memberRepository;
+		this.discountPolicy = discountPolicy;
+	}
+
+	
+	public OrderServiceImpl() {
+		this.memberRepository = new MemoryMemberRepository(); 
+		this.discountPolicy = new FixDiscountPolicy();
+	}
+
+
+
 	@Override
 	public Order createOrder(Long memberId, String itemName, int itemPrice) {
 		Member member = memberRepository.findById(memberId);
