@@ -2,6 +2,7 @@ package hello.core.order;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import hello.core.AppConfig;
@@ -17,6 +18,7 @@ class OrderServiceTest {
 	
 	@BeforeEach
 	void beforeEach() {
+		// AppConfig : 애노테이션 기반의 자바 설정 클래스로 스프링 컨테이너를 만들었음.
 		AppConfig appConfig = new AppConfig();
 		memberService = appConfig.memberService();
 		orderService = appConfig.orderService();
@@ -24,7 +26,8 @@ class OrderServiceTest {
 
 	
 	@Test
-	void 구현체외부주입_createOrder() {
+	@DisplayName("구현체를 외부에서 주입할 수 있다.")
+	void createOrder() {
 		
 		// givne
 		Long memberId = 1L;
@@ -43,7 +46,8 @@ class OrderServiceTest {
 	}
 	
 	@Test
-	void 구현체직접생성_createOrder() {
+	@DisplayName("구현체를 직접 생성할 수 있다.")
+	void createOrderByDirect() {
 		MemberService memberService = new MemberServiceImpl();
 		OrderService orderService = new OrderServiceImpl();
 		
