@@ -30,13 +30,10 @@ public class OrderServiceImpl implements OrderService{
 		this.discountPolicy = discountPolicy;
 	}
 
-	
 	public OrderServiceImpl() {
 		this.memberRepository = new MemoryMemberRepository(); 
 		this.discountPolicy = new FixDiscountPolicy();
 	}
-
-
 
 	@Override
 	public Order createOrder(Long memberId, String itemName, int itemPrice) {
@@ -45,5 +42,11 @@ public class OrderServiceImpl implements OrderService{
 		
 		return new Order(memberId, itemName, itemPrice, discountPrice);
 	}
+	
+
+	//테스트 용도
+	public MemberRepository getMemberRepository() {
+		return memberRepository;
+	}	
 	
 }

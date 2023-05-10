@@ -32,10 +32,6 @@ public class MemberServiceImpl implements MemberService {
 		this.memberRepository = new MemoryMemberRepository();
 	}
 
-
-
-
-
 	@Override
 	public void join(Member member) {
 		memberRepository.save(member);
@@ -46,4 +42,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.findById(id);
 	}
 
+	//테스트 용도
+	public MemberRepository getMemberRepository() {
+		return memberRepository;
+	}
+	
 }
