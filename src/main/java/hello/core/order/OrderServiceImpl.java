@@ -34,8 +34,8 @@ public class OrderServiceImpl implements OrderService{
 //		System.out.println("setDiscountPolicy = " + discountPolicy.getClass());
 //		this.discountPolicy = discountPolicy;
 //	}
-//
-//	@Autowired(required = false)
+	
+//	@Autowired(required = false) // required false를 하면 autowired 시 주입해야 되는 객체가 스프링 빈에 등록되어 있지 않으면 해당 set 메소드를 실행하지 않는다. 그래서 오류도 발생하지 않는다.
 //	public void setMemberRepository(MemberRepository memberRepository) {
 //		System.out.println("setMemberRepository = " + memberRepository.getClass());
 //		this.memberRepository = memberRepository;
