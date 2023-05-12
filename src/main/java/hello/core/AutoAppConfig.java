@@ -1,9 +1,14 @@
 package hello.core;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+
+import hello.core.member.repository.MemberRepository;
+import hello.core.member.repository.MemoryMemberRepository;
+import hello.core.member.service.MemberService;
 
 /**
  * 
@@ -21,4 +26,12 @@ import org.springframework.context.annotation.FilterType;
 		)
 public class AutoAppConfig {
 
+	/**
+	 * 자동 빈 등록이 이미 되어 있는 경우 아래처럼 중복된 수동 빈이 등록되면 수동빈이 우선한다. 자동빈을 overriding 함. 
+	 */
+//	@Bean("memoryMemberRepository")
+//	public MemberRepository memberRepository() {
+//		return new MemoryMemberRepository();
+//	}
+	
 }

@@ -28,12 +28,31 @@ public class OrderServiceImpl implements OrderService{
 	private final DiscountPolicy discountPolicy;
 	private final MemberRepository memberRepository;
 	
+	
+//	@Autowired
+//	public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//		System.out.println("setDiscountPolicy = " + discountPolicy.getClass());
+//		this.discountPolicy = discountPolicy;
+//	}
+//
+//	@Autowired(required = false)
+//	public void setMemberRepository(MemberRepository memberRepository) {
+//		System.out.println("setMemberRepository = " + memberRepository.getClass());
+//		this.memberRepository = memberRepository;
+//	}
+
 	@Autowired
 	public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+		System.out.println("OrderServiceImpl");
 		this.memberRepository = memberRepository;
 		this.discountPolicy = discountPolicy;
 	}
 
+	/**
+	 * 테스트 용도 - 없으면 특정 Test 클래스에서 컴파일 오류 발생.
+	 * final로 선언된 필드는 무조건 초기화를 해줘야 하기때문에 빈 기본생성자를 추가하는 경우 기본 생성자 안에서 무조건 필드를 초기화 해줘야 한다.
+	 * 빈 기본생성자는 생성이 안된다.
+	 */
 	public OrderServiceImpl() {
 		this.memberRepository = new MemoryMemberRepository(); 
 		this.discountPolicy = new FixDiscountPolicy();
