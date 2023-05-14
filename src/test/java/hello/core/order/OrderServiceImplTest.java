@@ -15,8 +15,9 @@ class OrderServiceImplTest {
 	 * setter 주입으로 한 경우 직접 의존관계를 넣어줘야 한다. 
 	 * 넣어주지 않으면 null 에러 발생.
 	 * 
-	 * 생성자 주입으로 사용하는 경우 의존성 주입을 해주지 않으면 
-	 * 일단 OrderServiceImpl 객체의 인스턴스를 생성할 때 컴파일 오류가 발생한다. 즉, 넣어줄 수 밖에 없다. 
+	 * 생성자 주입 방식을 사용하는 경우 의존성 주입을 해주지 않으면 
+	 * OrderServiceImpl 객체의 인스턴스를 생성할 때 컴파일 오류가 발생을 하기 때문에 넣어줄 수 밖에 없다.
+	 * 즉, 컴파일 시점에 오류를 통해 의존성 주입을 하도록 강제할 수 있다. 
 	 */
 	@Test
 	void creatOrder() {
@@ -25,7 +26,7 @@ class OrderServiceImplTest {
 		MemoryMemberRepository memberRepository = new MemoryMemberRepository();
 		memberRepository.save(new Member(1L, "name", Grade.VIP));
 		
-		OrderServiceImpl orderService = new OrderServiceImpl(new MemoryMemberRepository(), new RateDiscountPolicy());
+		OrderServiceImpl orderService = new OrderServiceImpl(memberRepository, new RateDiscountPolicy());
 		
 		// setter 주입
 //		orderService.setMemberRepository(new MemoryMemberRepository());

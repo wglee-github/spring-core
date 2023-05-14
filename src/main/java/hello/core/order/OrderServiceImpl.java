@@ -1,8 +1,10 @@
 package hello.core.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.member.Member;
@@ -41,11 +43,15 @@ public class OrderServiceImpl implements OrderService{
 //		this.memberRepository = memberRepository;
 //	}
 
+	/**
+	 *  @RequiredArgsConstructor 사용하면 final로 선언된 필드들을 주입받을 수 있는 생성자를 자동으로 만들어 준다.
+	 *  따라서 아래 코드 필요 없음.
+	 */
 	@Autowired
-	public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+	public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy rateDiscountPolicy) {
 		System.out.println("OrderServiceImpl");
 		this.memberRepository = memberRepository;
-		this.discountPolicy = discountPolicy;
+		this.discountPolicy = rateDiscountPolicy;
 	}
 
 	/**
@@ -72,4 +78,8 @@ public class OrderServiceImpl implements OrderService{
 		return memberRepository;
 	}	
 	
+	//테스트 용도
+	public DiscountPolicy getdisDiscountPolicy() {
+		return discountPolicy;
+	}
 }
